@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import django_heroku
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -77,12 +80,13 @@ WSGI_APPLICATION = 'diet.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sql
-        'HOST': 'ec2-35-168-77-215.compute-1.amazonaws.com'
-        'DATABASE' : 'd9p188bfdvgbna'
-        'USER' : 'beboiuhjlmqcgu'
-        'PORT' : 5432
-        'PASSWORD' :'17832ea1d591b47b8bf2a5f52b9213bc3ac14ae5fb92a498f76d7b1347fdff0a'
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': 'ec2-35-168-77-215.compute-1.amazonaws.com',
+        'NAME' : 'd9p188bfdvgbna',
+        'DATABASE' : 'd9p188bfdvgbna',
+        'USER' : 'beboiuhjlmqcgu',
+        'PORT' : 5432,
+        'PASSWORD' :'17832ea1d591b47b8bf2a5f52b9213bc3ac14ae5fb92a498f76d7b1347fdff0a',
         'URI' : 'postgres://beboiuhjlmqcgu:17832ea1d591b47b8bf2a5f52b9213bc3ac14ae5fb92a498f76d7b1347fdff0a@ec2-35-168-77-215.compute-1.amazonaws.com:5432/d9p188bfdvgbna'
         #Heroku CLI - heroku pg:psql postgresql-cubic-86951 --app psmf-diet
     }
@@ -90,7 +94,7 @@ DATABASES = {
 
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
-ATABASES['default'].update(db_from_env)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -128,4 +132,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+django_heroku.settings(locals())

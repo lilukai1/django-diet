@@ -11,7 +11,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class Stats(ListView):
     model = Stats
     context_object_name = 'stats'
-    print(Stats.objects.all())
     # def get_context_data(self, **kwargs):
     #     print(**kwargs)
     #     context = super().get_context_data(**kwargs)
