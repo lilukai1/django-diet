@@ -1,0 +1,70 @@
+<!doctype html>
+{% load static %}
+<!--
+	Fox by FreeHTML5.co
+	Twitter: https://twitter.com/fh5co
+	Facebook: https://fb.com/fh5co
+	URL: https://freehtml5.co
+-->
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Diet Tracker</title>
+
+  <!-- Bootstrap CSS -->
+  <link href='{% static "css/animate.css" %}' rel="stylesheet">
+  <link rel="stylesheet" href='{% static "css/bootstrap.min.css"%}' type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href='{% static "css/style.css" %}'>
+</head>
+
+<body>
+    <div class="container-fluid pl-0 pr-0 bg-img clearfix parallax-window2" data-parallax="scroll" data-image-src='{% static "images/banner2.jpg" %}'>
+        <nav class="navbar navbar-expand-md navbar-dark">
+          <div class="container"> 
+            <!-- Brand --> 
+            <a class="navbar-brand mr-auto" href="#"><img src='{% static "images/logo.png" %}' alt="FoxPro" /></a> 
+            
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"> <span class="navbar-toggler-icon"></span> </button>
+            
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item"> <a class="nav-link" href=" {% url 'add_stats' %}">Add Stats</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="#about-us">About</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="#">Courses</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="#contact">Contact</a> </li>
+              </ul>
+              <ul class="navbar-nav ml-5">
+                <li class="nav-item"> <a class="nav-link btn btn-danger" href="{% url 'login' %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div class = "container">
+            {% if messages %}
+            <div class="notification is-success">
+                <button class="delete"></button>
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li class="{{ message.tags }}">
+                        <strong>
+                            {{ message }}
+                        </strong>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}    
+        </div>
+        
+
+    {% block content %}
+    {% endblock content %}
+
+  <script src='{% static "js/scripts.js" %}'></script>
+</body>
+</html>

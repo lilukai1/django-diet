@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "psmf_calculator",
-    'accounts'
+    'accounts',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -138,9 +139,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
-
-AUTH_USER_MODEL = 'accounts.Account'
+LOGIN_REDIRECT_URL = 'psmf_index'
+LOGOUT_REDIRECT_URL = 'psmf_index'
+SIGNUP_REDIRECT_URL = 'psmf_index'
+# AUTH_USER_MODEL = 'accounts.Account'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+CRISPY_TEMPLATE_PACK = 'uni_form'
 
 django_heroku.settings(locals())

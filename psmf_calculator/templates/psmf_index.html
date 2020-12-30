@@ -1,25 +1,31 @@
-{% extends "to_do/base_view.html" %}
+{% extends "base_view.html" %}
 <br>
 {% block content %}
-<div class = "container">
+{%load static %}
 
-            {% if user.is_authenticated %}
-            {% for key in stats %}
-            <li>{{key.person}}</li>
-            <li>BMI: {{key.get_bmi|floatformat:1}}</li>
-            <li>BodyFat: {{key.get_bodyfat|floatformat:2}}%</li>
-            <li>LBM: {{key.get_lbm|floatformat:1}}</li>
-            <br>
-            <li>Diet Category: {{key.get_category}}</li>
-            <li>Protein Per Day: {{key.get_protein_per_day|floatformat:"0"}}</li>
-
-                {% endfor %}
-            {% else %}
-            {% endif %}
-           
+<div class="container-fluid fh5co-network">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="wow bounceInUp">Days in:</h4>
+                <h2 class="wow bounceInRight">{{client.person}}</h2>
+                <hr />
+                <h5 class="wow bounceInLeft">Total weight lost :</h5>
+                <p class="wow bounceInDown">
+                    <ul>BMI: {{client.get_bmi|floatformat:1}}</ul>
+                    <ul>BodyFat: {{client.get_bodyfat|floatformat:2}}%</ul>
+                    <ul>LBM: {{client.get_lbm|floatformat:1}} lbs</ul>
+                    <br>
+                    <ul>Diet Category: {{client.get_category}}</ul>
+                    <ul>Protein Per Day: {{client.get_protein_per_day|floatformat:"0"}} g</ul>      
+                </p>
+            </div>
+            <div class="col-md-6">
+                <figure class="wow bounceInDown"> <img src='{% static "images/g1.jpg" %}' alt="gym" class="img-fluid" /> </figure>
+            </div>
+        </div>
+    </div>
 </div>
-<br>
-<br>
-
+<script src='{% static "js/scripts.js" %}'></script>
 
 {%endblock content %}

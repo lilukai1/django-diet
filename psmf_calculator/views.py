@@ -8,9 +8,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
-class Stats(ListView):
+class Stats(LoginRequiredMixin, DetailView):
     model = Stats
-    context_object_name = 'stats'
+    context_object_name = 'client'
     # def get_context_data(self, **kwargs):
     #     print(**kwargs)
     #     context = super().get_context_data(**kwargs)
