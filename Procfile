@@ -1,2 +1,2 @@
 heroku ps:scale web=1
-web: gunicorn psmf_diet.wsgi
+web: gunicorn django_diet.wsgi
